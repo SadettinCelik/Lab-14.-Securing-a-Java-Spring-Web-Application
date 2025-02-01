@@ -1,74 +1,75 @@
-# Secure School Management System API
+# Secure Blog API Implementation
 
-**Author:** Sadettin Celik  
+**Developer:** Sadettin Celik  
 **Student ID:** 40312
 
-A secure RESTful API built with Spring Boot for managing a school system with user authentication and course management.
+A Spring Boot application demonstrating secure blog functionality with user authentication and post management.
 
-## Features
+## Implemented Features
 
-- User registration and authentication with JWT tokens
-- Course management (CRUD operations)
+### 1. User Management
+- User registration with email validation
+- Secure password storage using BCrypt
+- Basic Authentication for login
+- Role-based authorization (USER, ADMIN)
+
+### 2. Post Management
+- Create new blog posts
+- View all posts or single post
+- Update existing posts (author only)
+- Delete posts (author or admin)
+- Automatic author assignment
+
+### 3. Security Features
+- Basic Authentication integration
 - Role-based access control
-- H2 Database for data storage
+- Input validation
+- Cross-Site Scripting (XSS) protection
+- SQL injection protection via JPA
 
-## Tech Stack
+### 4. Data Storage
+- H2 Database with file persistence
+- Automatic schema generation
+- Data integrity with foreign key constraints
 
-- Java 17
-- Spring Boot 3.x
-- Spring Security with JWT
+### 5. Testing
+- Unit tests for services
+- Integration tests for controllers
+- Security test coverage
+
+## API Documentation
+
+### Authentication Endpoints
+```
+POST /auth/register
+GET  /auth/login
+```
+
+### Post Management Endpoints
+```
+GET    /api/posts      # List all posts
+POST   /api/posts      # Create new post
+GET    /api/posts/{id} # Get single post
+PUT    /api/posts/{id} # Update post
+DELETE /api/posts/{id} # Delete post
+```
+
+## Running the Application
+
+```bash
+# Build the project
+mvn clean install
+
+# Start the application
+mvn spring-boot:run
+
+# Access the application
+http://localhost:8080
+```
+
+## Technology Stack
+- Spring Boot 3.2.2
+- Spring Security
 - Spring Data JPA
 - H2 Database
-
-## Getting Started
-
-### Prerequisites
-- Java 17 or higher
-- Maven 3.6 or higher
-
-### Running the Application
-1. Clone the repository
-```bash
-git clone https://github.com/SadettinCelik/Lab-14.-Securing-a-Java-Spring-Web-Application.git
-```
-
-2. Build the project
-```bash
-mvn clean install
-```
-
-3. Run the application
-```bash
-mvn spring-boot:run
-```
-
-The application will start on `http://localhost:8080`
-
-## API Endpoints
-
-### Authentication
-- `POST /api/auth/register` - Register a new user
-  ```json
-  {
-    "username": "testuser",
-    "email": "test@example.com",
-    "password": "password123"
-  }
-  ```
-- `POST /api/auth/login` - Login and get JWT token
-  - Use your username and password in the Authorization header
-
-### Courses
-- `GET /api/courses` - List all courses
-- `POST /api/courses` - Create a new course
-  ```json
-  {
-    "name": "Mathematics",
-    "description": "This is a mathematics course"
-  }
-  ```
-- `GET /api/courses/{id}` - Get course details
-- `PUT /api/courses/{id}` - Update course
-- `DELETE /api/courses/{id}` - Delete course
-
-Note: All endpoints except `/api/auth/register` require JWT token in the Authorization header.
+- JUnit 5
